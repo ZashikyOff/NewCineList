@@ -1,0 +1,165 @@
+html * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body.index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body.index header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  background-color: #8080808b;
+}
+
+body.index header .link {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+body.index header .link form input[type="submit"] {
+  background: transparent;
+  border: none;
+}
+
+body.index main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px;
+  width: 100%;
+}
+
+body.index main .series,
+body.index main .movies,
+body.index main .animes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100px;
+  background-color: #e0ddd9;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+}
+
+.card:hover {
+  border-radius: 15px 0px 0px 15px;
+}
+
+.card .sub-card {
+  display: none;
+  width: 250px;
+  height: 475px;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 100px;
+  top: 0px;
+  background-color: #7fabb6da;
+  border-radius: 0px 15px 15px 15px;
+}
+
+.card:hover .sub-card {
+  display: flex;
+}
+
+.card .sub-card img {
+  height: 325px;
+  width: 100%;
+  object-fit: cover;
+  border: solid 5px transparent;
+  border-radius: 15px;
+}
+
+.card .sub-card p {
+  width: 90%;
+  padding: 5px 10px;
+  background-color: #477985da;
+  border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Page Login ----------------------------------------------------------------------------------------------------------------------------------- */
+
+body.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+body.login header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  width: 100%;
+  background-color: #7fabb6da;
+}
+
+body.login main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 85vh;
+}
+
+body.login main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 30%;
+  height: 30vh;
+  background-color: #7fabb6da;
+  border-radius: 15px;
+  margin-top: 50px;
+}
+
+body.login main form * {
+  padding: 5px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+body.login footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  width: 100%;
+  background-color: #7fabb6da;
+}
+
+#myDiv {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+}
