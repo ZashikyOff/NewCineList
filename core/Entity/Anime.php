@@ -54,4 +54,25 @@ class Anime
         }
         return $results;
     }
+
+    public static function AddAnime($title, $id)
+    {
+        require "config.php";
+        try {
+            $sql = "INSERT INTO `anime`(`title`, `years`, `description`, `poster_path`, `id_user`) VALUES (:title,:date,'description','img',:id    )";
+            $query = $lienDB->prepare($sql);
+
+            //On injecte les valeurs
+            date_default_timezone_set('Europe/Paris');
+            $date = date('d-m-y h:i:s');
+            $query->bindParam(":date", $date);
+            $query->bindValue(":title", $title, PDO::PARAM_STR);
+            $query->bindValue(":id", $id, PDO::PARAM_INT);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results;
+    }
 }

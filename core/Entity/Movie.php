@@ -18,7 +18,7 @@ class Movie
     private int $id_user;
 
     /** Constructeur */
-    public function __construct($title = "",$years = 0,$description = "", $poster_path = "",$id_user = 0)
+    public function __construct($title = "", $years = 0, $description = "", $poster_path = "", $id_user = 0)
     {
         $this->title = $title;
         $this->years = $years;
@@ -46,6 +46,27 @@ class Movie
         try {
             $sql = "SELECT * FROM movie WHERE id_user = :id";
             $query = $lienDB->prepare($sql);
+            $query->bindValue(":id", $id, PDO::PARAM_INT);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results;
+    }
+
+    public static function AddMovie($title, $id)
+    {
+        require "config.php";
+        try {
+            $sql = "INSERT INTO `movie`(`title`, `years`, `description`, `poster_path`, `id_user`) VALUES (:title,:date,'description','img',:id    )";
+            $query = $lienDB->prepare($sql);
+
+            //On injecte les valeurs
+            date_default_timezone_set('Europe/Paris');
+            $date = date('d-m-y h:i:s');
+            $query->bindParam(":date", $date);
+            $query->bindValue(":title", $title, PDO::PARAM_STR);
             $query->bindValue(":id", $id, PDO::PARAM_INT);
             $query->execute();
             $results = $query->fetchAll();

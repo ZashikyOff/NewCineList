@@ -27,6 +27,21 @@ function getMovie($movieName)
     return $result;
 }
 
+if(isset($_POST["title"])){
+    if($_POST["genre"] == "movie"){
+        Movie::AddMovie($_POST["title"],$_SESSION["identifiant"]);
+        header('Location: index.php');
+    }
+    if($_POST["genre"] == "serie"){
+        Serie::AddSerie($_POST["title"],$_SESSION["identifiant"]);
+        header('Location: index.php');
+    }
+    if($_POST["genre"] == "anime"){
+        Anime::AddAnime($_POST["title"],$_SESSION["identifiant"]);
+        header('Location: index.php');
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -36,13 +51,23 @@ function getMovie($movieName)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="core/css/main.css">
-    <title>Document</title>
+    <title>CinéList</title>
 </head>
 
 <body class="index">
     <header>
         <h1>Ciné List</h1>
         <div class="link">
+            <form method="post">
+                <input type="text" name="title" required>
+                <select name="genre" required>
+                    <option value="">-- Choose --</option>
+                    <option value="movie">Movie</option>
+                    <option value="serie">Serie</option>
+                    <option value="anime">Animé</option>
+                </select>
+                <button type="submit">Ajouter</button>
+            </form>
             <form method="post">
                 <input type="hidden" name="reload" value="True">
                 <input type="submit" value="Reload Cover">
@@ -59,9 +84,11 @@ function getMovie($movieName)
             ?>
                 <div class="card">
                     <h2><?= $serie["title"] ?></h2>
-                    <img src="<?= $serie["poster_path"] ?>">
-                    <p><?= $serie["description"] ?></p>
-                    <h4><?= $serie["years"] ?></h4>
+                    <div class="sub-card">
+                        <img src="<?= getMovie($serie["title"])["poster"] ?>">
+                        <p><?= getMovie($serie["title"])["plot"] ?></p>
+                        <h4><?= getMovie($serie["title"])["year"] ?></h4>
+                    </div>
                 </div>
             <?php
             }
@@ -93,9 +120,11 @@ function getMovie($movieName)
             ?>
                 <div class="card">
                     <h2><?= $anime["title"] ?></h2>
-                    <img src="<?= $anime["poster_path"] ?>">
-                    <p><?= $anime["description"] ?></p>
-                    <h4><?= $anime["years"] ?></h4>
+                    <div class="sub-card">
+                        <img src="<?= getMovie($anime["title"])["poster"] ?>">
+                        <p><?= getMovie($anime["title"])["plot"] ?></p>
+                        <h4><?= getMovie($anime["title"])["year"] ?></h4>
+                    </div>
                 </div>
             <?php
             }
