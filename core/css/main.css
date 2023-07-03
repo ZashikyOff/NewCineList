@@ -46,58 +46,50 @@ body.index main .animes {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
+  width: 33%;
   gap: 20px;
 }
 
 .card {
-  position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  width: 100px;
+  height: fit-content;
+  width: 250px;
   background-color: #e0ddd9;
   transition: all 0.3s ease-in-out;
   user-select: none;
 }
 
-.card:hover {
-  border-radius: 15px 0px 0px 15px;
-}
-
 .card .sub-card {
   display: none;
   width: 250px;
-  height: 475px;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  left: 100px;
-  top: 0px;
   background-color: #7fabb6da;
-  border-radius: 0px 15px 15px 15px;
-}
-
-.card:hover .sub-card {
-  display: flex;
+  border-radius: 0px 0px 15px 15px;
+  transition: all 0.5s ease-in-out;
 }
 
 .card .sub-card img {
-  height: 325px;
+  height: 0%;
   width: 100%;
   object-fit: cover;
-  border: solid 5px transparent;
   border-radius: 15px;
+  transition: all 0.5s ease-in-out;
 }
 
-.card .sub-card p {
+.card .sub-card p,.card .sub-card h4 {
+  display: none;
   width: 90%;
-  padding: 5px 10px;
-  background-color: #477985da;
-  border-radius: 10px;
-  border-radius: 10px;
+}
+
+.active {
+  display: flex;
+  max-height: 650px;
+  min-height: 400px;
+  height: fit-content;
 }
 
 /* Page Login ----------------------------------------------------------------------------------------------------------------------------------- */

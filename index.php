@@ -55,6 +55,7 @@ if(isset($_POST["title"])){
 </head>
 
 <body class="index">
+    <script src="core/js/app.js" defer></script>
     <header>
         <h1>Ciné List</h1>
         <div class="link">
