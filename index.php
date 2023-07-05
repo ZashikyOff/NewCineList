@@ -42,6 +42,21 @@ if(isset($_POST["title"])){
     }
 }
 
+if(isset($_GET["title"]) && isset($_GET["media"])){
+    if($_GET["media"] == "serie"){
+        Serie::DeleteSerie($_GET["title"]);
+        header('Location: index.php');
+    }
+    if($_GET["media"] == "movie"){
+        Movie::DeleteMovie($_GET["title"]);
+        header('Location: index.php');
+    }
+    if($_GET["media"] == "anime"){
+        Anime::DeleteAnime($_GET["title"]);
+        header('Location: index.php');
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -85,7 +100,7 @@ if(isset($_POST["title"])){
             foreach ($resultserie as $serie) {
             ?>
                 <div class="card">
-                    <h2><?= $serie["title"] ?><a href="?title=<?= $serie["title"] ?>"><i class="fa-solid fa-trash"></i></a></h2>
+                    <h2><?= $serie["title"] ?><a href="?title=<?= $serie["title"] ?>&media=serie"><i class="fa-solid fa-trash"></i></a></h2>
                     <div class="sub-card unactive">
                         <img src="<?= getMovie($serie["title"])["poster"] ?>">
                         <p><?= getMovie($serie["title"])["plot"] ?></p>
@@ -103,7 +118,7 @@ if(isset($_POST["title"])){
             foreach ($resultfilm as $movie) {
             ?>
                 <div class="card">
-                    <h2><?= $movie["title"] ?><a href="?title=<?= $serie["title"] ?>"><i class="fa-solid fa-trash"></i></a></h2>
+                    <h2><?= $movie["title"] ?><a href="?title=<?= $movie["title"] ?>&media=movie"><i class="fa-solid fa-trash"></i></a></h2>
                     <div class="sub-card unactive">
                         <img src="<?= getMovie($movie["title"])["poster"] ?>">
                         <p><?= getMovie($movie["title"])["plot"] ?></p>
@@ -121,7 +136,7 @@ if(isset($_POST["title"])){
             foreach ($resultanime as $anime) {
             ?>
                 <div class="card">
-                    <h2><?= $anime["title"] ?><a href="?title=<?= $serie["title"] ?>"><i class="fa-solid fa-trash"></i></a></h2>
+                    <h2><?= $anime["title"] ?><a href="?title=<?= $anime["title"] ?>&media=anime"><i class="fa-solid fa-trash"></i></a></h2>
                     <div class="sub-card unactive">
                         <img src="<?= getMovie($anime["title"])["poster"] ?>">
                         <p><?= getMovie($anime["title"])["plot"] ?></p>

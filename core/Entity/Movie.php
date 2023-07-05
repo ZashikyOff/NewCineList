@@ -75,4 +75,21 @@ class Movie
         }
         return $results;
     }
+
+    public static function DeleteMovie($title)
+    {
+        require "config.php";
+        try {
+            $sql = "DELETE FROM `movie` WHERE `title` = :title";
+            $query = $lienDB->prepare($sql);
+
+            //On injecte les valeurs
+            $query->bindValue(":title", $title, PDO::PARAM_STR);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results;
+    }
 }
