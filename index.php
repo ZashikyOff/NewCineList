@@ -50,6 +50,7 @@ if(isset($_POST["title"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="core/css/main.css">
     <title>CinéList</title>
 </head>
@@ -59,7 +60,7 @@ if(isset($_POST["title"])){
     <header>
         <h1>Ciné List</h1>
         <div class="link">
-            <form method="post">
+            <form method="post" class="addmedia">
                 <input type="text" name="title" required>
                 <select name="genre" required>
                     <option value="">-- Choose --</option>
@@ -84,8 +85,8 @@ if(isset($_POST["title"])){
             foreach ($resultserie as $serie) {
             ?>
                 <div class="card">
-                    <h2><?= $serie["title"] ?></h2>
-                    <div class="sub-card">
+                    <h2><?= $serie["title"] ?><a href="?title=<?= $serie["title"] ?>"><i class="fa-solid fa-trash"></i></a></h2>
+                    <div class="sub-card unactive">
                         <img src="<?= getMovie($serie["title"])["poster"] ?>">
                         <p><?= getMovie($serie["title"])["plot"] ?></p>
                         <h4><?= getMovie($serie["title"])["year"] ?></h4>
@@ -102,8 +103,8 @@ if(isset($_POST["title"])){
             foreach ($resultfilm as $movie) {
             ?>
                 <div class="card">
-                    <h2><?= $movie["title"] ?></h2>
-                    <div class="sub-card">
+                    <h2><?= $movie["title"] ?><a href="?title=<?= $serie["title"] ?>"><i class="fa-solid fa-trash"></i></a></h2>
+                    <div class="sub-card unactive">
                         <img src="<?= getMovie($movie["title"])["poster"] ?>">
                         <p><?= getMovie($movie["title"])["plot"] ?></p>
                         <h4><?= getMovie($movie["title"])["year"] ?></h4>
@@ -120,8 +121,8 @@ if(isset($_POST["title"])){
             foreach ($resultanime as $anime) {
             ?>
                 <div class="card">
-                    <h2><?= $anime["title"] ?></h2>
-                    <div class="sub-card">
+                    <h2><?= $anime["title"] ?><a href="?title=<?= $serie["title"] ?>"><i class="fa-solid fa-trash"></i></a></h2>
+                    <div class="sub-card unactive">
                         <img src="<?= getMovie($anime["title"])["poster"] ?>">
                         <p><?= getMovie($anime["title"])["plot"] ?></p>
                         <h4><?= getMovie($anime["title"])["year"] ?></h4>

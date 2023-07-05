@@ -5,8 +5,10 @@ var divs = document.getElementsByClassName('card');
 function toggleCssClass() {
   if (this.lastElementChild.classList.contains('active')) {
     this.lastElementChild.classList.remove('active');
+    this.lastElementChild.classList.add('unactive');
   } else {
     this.lastElementChild.classList.add('active');
+    this.lastElementChild.classList.remove('unactive');
   }
 }
 

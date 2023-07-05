@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
 html * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Fjalla One', sans-serif;
+  /* font-family: 'Caprasimo', cursive; */
+  font-weight: 200;
 }
 
 body.index {
@@ -24,12 +31,43 @@ body.index header {
 body.index header .link {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 15px;
 }
 
-body.index header .link form input[type="submit"] {
-  background: transparent;
+body.index header .link a{
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #000000;
+}
+
+body.index header .link .addmedia {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #6666668b;
+  gap: 15px;
+}
+
+body.index header .link .addmedia input, 
+body.index header .link .addmedia button,
+body.index header .link .addmedia select {
+  padding: 5px;
   border: none;
+  outline: none;
+  border-radius: 10px;
+}
+
+body.index header .link form input[type="submit"] {
+  cursor: pointer;
+  background-color: #ffffff;
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 body.index main {
@@ -57,13 +95,28 @@ body.index main .animes {
   justify-content: center;
   height: fit-content;
   width: 250px;
+  border-radius: 10px;
   background-color: #e0ddd9;
   transition: all 0.3s ease-in-out;
   user-select: none;
+  cursor: pointer;
+}
+
+.card h2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  padding: 5px;
+}
+
+.card h2 a {
+  color: rgb(54, 54, 54);
+  font-size: 80%;
 }
 
 .card .sub-card {
-  display: none;
   width: 250px;
   flex-direction: column;
   align-items: center;
@@ -73,17 +126,19 @@ body.index main .animes {
 }
 
 .card .sub-card img {
-  height: 0%;
+  height: 70%;
   width: 100%;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 0px 0px 15px 15px;
   transition: all 0.5s ease-in-out;
 }
 
 .card .sub-card p,.card .sub-card h4 {
-  display: none;
   width: 90%;
+  text-align: center;
+  padding-top: 10px;
 }
+
 
 .active {
   display: flex;
@@ -91,6 +146,11 @@ body.index main .animes {
   min-height: 400px;
   height: fit-content;
 }
+
+.unactive {
+  display: none;
+}
+
 
 /* Page Login ----------------------------------------------------------------------------------------------------------------------------------- */
 
