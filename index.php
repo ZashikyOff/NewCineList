@@ -27,31 +27,68 @@ function getMovie($movieName)
     return $result;
 }
 
-if(isset($_POST["title"])){
-    if($_POST["genre"] == "movie"){
-        Movie::AddMovie($_POST["title"],$_SESSION["identifiant"]);
+
+function download($url, $title)
+{
+    // Initialize a file URL to the variable
+    // $url = 'https://static9.depositphotos.com/1000291/1113/i/600/depositphotos_11133127-stock-photo-goat-with-horn-at-green.jpg';
+
+    // Use basename() function to return the base name of file
+    $file_name = "./core/covers/" . $title . ".jpg";
+    $file_folder = "./core/covers/*";
+
+    $files = glob($file_folder);
+
+    $nomTrouve = false;
+
+    foreach ($files as $file) {
+        $file = substr($file, 14);
+        var_dump($file);
+        // Vérifier si le nom du fichier correspond
+        if (basename($file) == $title) {
+            $nomTrouve = true;
+            break;
+        }
+    }
+
+    if ($nomTrouve) {
+    } else {
+        // Use file_get_contents() function to get the file
+        // from url and use file_put_contents() function to
+        // save the file by using base name
+        if (file_put_contents($file_name, file_get_contents($url))) {
+            echo "File downloaded successfully";
+        } else {
+            echo "File downloading failed.";
+        }
+    }
+}
+
+if (isset($_POST["title"])) {
+    if ($_POST["genre"] == "movie") {
+        Movie::AddMovie($_POST["title"], $_SESSION["identifiant"]);
         header('Location: index.php');
     }
-    if($_POST["genre"] == "serie"){
-        Serie::AddSerie($_POST["title"],$_SESSION["identifiant"]);
+    if ($_POST["genre"] == "serie") {
+        Serie::AddSerie($_POST["title"], $_SESSION["identifiant"]);
         header('Location: index.php');
     }
-    if($_POST["genre"] == "anime"){
-        Anime::AddAnime($_POST["title"],$_SESSION["identifiant"]);
+    if ($_POST["genre"] == "anime") {
+        Anime::AddAnime($_POST["title"], $_SESSION["identifiant"]);
         header('Location: index.php');
     }
 }
 
-if(isset($_GET["title"]) && isset($_GET["media"])){
-    if($_GET["media"] == "serie"){
+if (isset($_GET["title"]) && isset($_GET["media"])) {
+    if ($_GET["media"] == "serie") {
         Serie::DeleteSerie($_GET["title"]);
         header('Location: index.php');
     }
-    if($_GET["media"] == "movie"){
+    if ($_GET["media"] == "movie") {
         Movie::DeleteMovie($_GET["title"]);
         header('Location: index.php');
     }
-    if($_GET["media"] == "anime"){
+    if ($_GET["media"] == "anime") {
         Anime::DeleteAnime($_GET["title"]);
         header('Location: index.php');
     }
@@ -86,7 +123,7 @@ if(isset($_GET["title"]) && isset($_GET["media"])){
                 <button type="submit">Ajouter</button>
             </form>
             <form method="post">
-                <input type="hidden" name="reload" value="True">
+                <input type="hidden" name="reload" value="true">
                 <input type="submit" value="Reload Cover">
             </form>
             <a href="core/logout.php">Deconnexion</a>
@@ -108,6 +145,7 @@ if(isset($_GET["title"]) && isset($_GET["media"])){
                     </div>
                 </div>
             <?php
+                download(getMovie($serie["title"])["poster"], $serie["title"]);
             }
             ?>
         </div>
