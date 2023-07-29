@@ -88,6 +88,10 @@ body.index main .animes {
   gap: 20px;
 }
 
+.typemedia {
+  color: #ffffff;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -95,8 +99,8 @@ body.index main .animes {
   justify-content: center;
   height: fit-content;
   width: 250px;
-  border-radius: 10px;
-  background-color: #e0ddd9;
+  border-radius: 15px;
+  background-color: #e0e0e0;
   transition: all 0.3s ease-in-out;
   user-select: none;
   cursor: pointer;
@@ -111,6 +115,7 @@ body.index main .animes {
   padding: 5px;
 }
 
+
 .card h2 a {
   color: rgb(54, 54, 54);
   font-size: 80%;
@@ -120,7 +125,7 @@ body.index main .animes {
   width: 250px;
   flex-direction: column;
   align-items: center;
-  background-color: #7fabb6da;
+  background: linear-gradient(180deg, rgba(224,224,224,1) 0%, rgba(82,82,82,1) 45%);
   border-radius: 0px 0px 15px 15px;
   transition: all 0.5s ease-in-out;
 }
@@ -129,7 +134,8 @@ body.index main .animes {
   height: 70%;
   width: 100%;
   object-fit: cover;
-  border-radius: 0px 0px 15px 15px;
+  border: 10px solid transparent;
+  border-radius: 15px;
   transition: all 0.5s ease-in-out;
 }
 
@@ -137,6 +143,8 @@ body.index main .animes {
   width: 90%;
   text-align: center;
   padding-top: 10px;
+  padding-bottom: 10px;
+  color: #ffffff;
 }
 
 
@@ -149,6 +157,23 @@ body.index main .animes {
 
 .unactive {
   display: none;
+}
+.background {
+  height: 100%;
+  width: 100vw;
+  object-fit: cover;
+  position: absolute;
+  z-index: -1;
+  background-color: rgba(117, 117, 117, 0.507);
+  overflow: hidden;
+}
+
+.background img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  filter: blur(5px);
 }
 
 

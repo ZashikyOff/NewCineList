@@ -120,6 +120,9 @@ if (isset($_GET["title"]) && isset($_GET["media"])) {
 </head>
 
 <body class="index">
+    <div class="background">
+    <img src="core/background.jpg">
+    </div>
     <script src="core/js/app.js" defer></script>
     <header>
         <h1>Ciné List</h1>
@@ -139,7 +142,7 @@ if (isset($_GET["title"]) && isset($_GET["media"])) {
     </header>
     <main>
         <div class="series">
-            <h2>Series</h2>
+            <h2 class="typemedia">Series</h2>
             <?php
             $resultserie = Serie::SerieById($_SESSION["identifiant"]);
             foreach ($resultserie as $serie) {
@@ -163,7 +166,7 @@ if (isset($_GET["title"]) && isset($_GET["media"])) {
             ?>
         </div>
         <div class="movies">
-            <h2>Movies</h2>
+            <h2 class="typemedia">Movies</h2>
             <?php
             $resultfilm = Movie::MovieById($_SESSION["identifiant"]);
             foreach ($resultfilm as $movie) {
@@ -187,7 +190,7 @@ if (isset($_GET["title"]) && isset($_GET["media"])) {
             ?>
         </div>
         <div class="animes">
-            <h2>Animes</h2>
+            <h2 class="typemedia">Animes</h2>
             <?php
             $resultanime = Anime::AnimeById($_SESSION["identifiant"]);
             foreach ($resultanime as $anime) {
