@@ -28,7 +28,7 @@ function getMovie($movieName)
 }
 
 
-function download($url, $title)
+function download($url, $title, $media)
 {
     // Initialize a file URL to the variable
     // $url = 'https://static9.depositphotos.com/1000291/1113/i/600/depositphotos_11133127-stock-photo-goat-with-horn-at-green.jpg';
@@ -43,7 +43,7 @@ function download($url, $title)
 
     foreach ($files as $file) {
         $file = substr($file, 14);
-        var_dump($file);
+        // var_dump($file);
         // Vérifier si le nom du fichier correspond
         if (basename($file) == $title) {
             $nomTrouve = true;
@@ -57,9 +57,21 @@ function download($url, $title)
         // from url and use file_put_contents() function to
         // save the file by using base name
         if (file_put_contents($file_name, file_get_contents($url))) {
-            echo "File downloaded successfully";
+            // echo "File downloaded successfully";
+            require "core/Entity/config.php";
+            try {
+                $sql = "UPDATE $media SET poster_path = :poster WHERE title = :title";
+                $query = $lienDB->prepare($sql);
+
+                //On injecte les valeurs
+                $query->bindValue(":title", $title, PDO::PARAM_STR);
+                $query->bindValue(":poster", $file_name, PDO::PARAM_STR);
+                $query->execute();
+            } catch (Exception $e) {
+                print_r($e);
+            }
         } else {
-            echo "File downloading failed.";
+            // echo "File downloading failed.";
         }
     }
 }
@@ -122,10 +134,6 @@ if (isset($_GET["title"]) && isset($_GET["media"])) {
                 </select>
                 <button type="submit">Ajouter</button>
             </form>
-            <form method="post">
-                <input type="hidden" name="reload" value="true">
-                <input type="submit" value="Reload Cover">
-            </form>
             <a href="core/logout.php">Deconnexion</a>
         </div>
     </header>
@@ -135,17 +143,22 @@ if (isset($_GET["title"]) && isset($_GET["media"])) {
             <?php
             $resultserie = Serie::SerieById($_SESSION["identifiant"]);
             foreach ($resultserie as $serie) {
+                $poster_path = Serie::Poster_path($serie["title"]);
             ?>
                 <div class="card">
                     <h2><?= $serie["title"] ?><a href="?title=<?= $serie["title"] ?>&media=serie"><i class="fa-solid fa-trash"></i></a></h2>
                     <div class="sub-card unactive">
-                        <img src="<?= getMovie($serie["title"])["poster"] ?>">
+                        <img src="<?php if (strlen($poster_path) > 20) {
+                                        echo $poster_path;
+                                    } else {
+                                        echo getMovie($serie["title"])["poster"];
+                                    } ?>">
                         <p><?= getMovie($serie["title"])["plot"] ?></p>
                         <h4><?= getMovie($serie["title"])["year"] ?></h4>
                     </div>
                 </div>
             <?php
-                download(getMovie($serie["title"])["poster"], $serie["title"]);
+                download(getMovie($serie["title"])["poster"], $serie["title"], "serie");
             }
             ?>
         </div>
@@ -154,16 +167,22 @@ if (isset($_GET["title"]) && isset($_GET["media"])) {
             <?php
             $resultfilm = Movie::MovieById($_SESSION["identifiant"]);
             foreach ($resultfilm as $movie) {
+                $poster_path = Movie::Poster_path($movie["title"]);
             ?>
                 <div class="card">
                     <h2><?= $movie["title"] ?><a href="?title=<?= $movie["title"] ?>&media=movie"><i class="fa-solid fa-trash"></i></a></h2>
                     <div class="sub-card unactive">
-                        <img src="<?= getMovie($movie["title"])["poster"] ?>">
+                        <img src="<?php if (strlen($poster_path) > 20) {
+                                        echo $poster_path;
+                                    } else {
+                                        echo getMovie($movie["title"])["poster"];
+                                    } ?>">
                         <p><?= getMovie($movie["title"])["plot"] ?></p>
                         <h4><?= getMovie($movie["title"])["year"] ?></h4>
                     </div>
                 </div>
             <?php
+                download(getMovie($movie["title"])["poster"], $movie["title"], "movie");
             }
             ?>
         </div>
@@ -172,16 +191,22 @@ if (isset($_GET["title"]) && isset($_GET["media"])) {
             <?php
             $resultanime = Anime::AnimeById($_SESSION["identifiant"]);
             foreach ($resultanime as $anime) {
+                $poster_path = Anime::Poster_path($anime["title"]);
             ?>
                 <div class="card">
                     <h2><?= $anime["title"] ?><a href="?title=<?= $anime["title"] ?>&media=anime"><i class="fa-solid fa-trash"></i></a></h2>
                     <div class="sub-card unactive">
-                        <img src="<?= getMovie($anime["title"])["poster"] ?>">
+                        <img src="<?php if (strlen($poster_path) > 20) {
+                                        echo $poster_path;
+                                    } else {
+                                        echo getMovie($anime["title"])["poster"];
+                                    } ?>">
                         <p><?= getMovie($anime["title"])["plot"] ?></p>
                         <h4><?= getMovie($anime["title"])["year"] ?></h4>
                     </div>
                 </div>
             <?php
+                download(getMovie($anime["title"])["poster"], $anime["title"], "anime");
             }
             ?>
         </div>

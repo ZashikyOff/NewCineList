@@ -76,6 +76,21 @@ class Anime
         return $results;
     }
 
+    public static function Poster_path($title)
+    {
+        require "config.php";
+        try {
+            $sql = "SELECT poster_path FROM anime WHERE title = :title";
+            $query = $lienDB->prepare($sql);
+            $query->bindValue(":title", $title, PDO::PARAM_STR);
+            $query->execute();
+            $results = $query->fetch();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results["poster_path"];
+    }
+
     public static function DeleteAnime($title)
     {
         require "config.php";
